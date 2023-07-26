@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', )
+@section('title', 'Profile')
     
 @section('content')
   @include('users.profile.header')
