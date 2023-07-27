@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth'], function(){
     // Message
     Route::get('/message/{user_id}', [MessageController::class, 'getRoom'])->name('message.room');
     Route::post('/message/{user_id}/send', [MessageController::class, 'sendMessage'])->name('message.send');
+    Route::get('/message', [MessageController::class, 'index'])->name('message.index');
 
     #Admin
     Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin'], function(){

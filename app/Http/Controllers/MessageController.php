@@ -41,4 +41,25 @@ class MessageController extends Controller
 
         return redirect()->back();
     }
+
+    public function index(){
+        $all_users = $this->user->all()->except(Auth::user()->id);
+        $rooms = [];
+
+        foreach($all_users as $user){
+            $user_id = $user->id;
+            $messages = $this->message->where(function ($query) use ($user_id){
+                $query->where('receiver_id', Auth::user()->id)->where('sender_id', $user_id);
+            })->orWhere(function ($query) use ($user_id){
+                $query->where('sender_id', Auth::user()->id)->where('receiver_id', $user_id);
+            });
+
+            if($messages->exists()){
+                $latest_message = $messages->latest()->first();
+                $rooms[] = [$user, $latest_message];
+            }
+        }
+
+        return view('users.messages.index')->with('rooms', $rooms);
+    }
 }

@@ -71,6 +71,11 @@
                                 <a href="{{ route('post.create') }}" class="nav-link"><i class="fa-solid fa-circle-plus icon-sm"></i></a>
                             </li>
 
+                            {{-- Message --}}
+                            <li class="nav-item">
+                                <a href="{{ route('message.index') }}" class="nav-link"><i class="fa-solid fa-message icon-sm"></i></a>
+                            </li>
+
                             {{-- Account --}}
                             <li class="nav-item dropdown">
                                 <button id="account-dropdown" class="btn shadow-none nav-link" data-bs-toggle="dropdown">
