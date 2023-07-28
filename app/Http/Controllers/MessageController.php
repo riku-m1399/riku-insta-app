@@ -56,10 +56,13 @@ class MessageController extends Controller
 
             if($messages->exists()){
                 $latest_message = $messages->latest()->first();
-                $rooms[] = [$user, $latest_message];
+                $rooms[] = [$user, $latest_message, 'time' => $latest_message->created_at];
             }
         }
 
+        $time = array_column($rooms, 'time');
+        array_multisort($time, SORT_DESC, $rooms);
+        
         return view('users.messages.index')->with('rooms', $rooms);
     }
 }
